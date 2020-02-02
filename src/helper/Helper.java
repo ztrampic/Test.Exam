@@ -12,11 +12,9 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Helper {
 
@@ -142,5 +140,14 @@ public class Helper {
             }
         }
         return projects;
+    }
+
+    public List<Projekat> doRelationsSingle(AngazovanjeNaProjektu angazovanjeNaProjektu, List<Projekat> list) {
+        for (Projekat p : list) {
+            if(p.getSifra() == angazovanjeNaProjektu.getSifraProjekat()){
+                p.addAngazovanje(angazovanjeNaProjektu);
+            }
+        }
+        return list;
     }
 }

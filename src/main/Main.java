@@ -33,7 +33,7 @@ public class Main {
         fileZaposleni = new FileZaposleni();
         fIleProject = new FileProject();
         fileAngazovanja = new FileAngazovanja();
-        List<Projekat> list = helper.doRelations(fileAngazovanja.getList(),fIleProject.getProjekatList());
+        List<Projekat> list = helper.doRelations(fileAngazovanja.getList(), fIleProject.getProjekatList());
         fIleProject.setProjekatList(list);
     }
 
@@ -77,12 +77,24 @@ public class Main {
                 int number = helper.validateInput(sc);
                 switch (number) {
                     case 1:
-                        Projekat projekat = serviceProjekat.saveProjekat();
-                        if(projekat == null){
-                            count--;
-                            System.err.println("Neuspesno kreiranje novog projekta.");
-                        }else{
-                            serviceAngazovanja.createNewAngazovanje(projekat);
+                        int choice = MenuText.showMenuNewProjectOrUpdate(helper);
+                        switch (choice) {
+                            case 1:
+                                Projekat projekat = serviceProjekat.saveProjekat();
+                                if (projekat == null) {
+                                    count--;
+                                    System.err.println("Neuspesno kreiranje novog projekta.");
+                                } else {
+                                    serviceAngazovanja.createNewAngazovanje(projekat);
+                                }
+                                break;
+                            case 2:
+                                System.out.println("OVDE SMO");
+                                break;
+                            default:
+                                System.err.println("Niste izabrali nista od ponudjenog");
+                                count = 0;
+                                break;
                         }
                         break;
                     case 2:

@@ -12,6 +12,8 @@ public class DAOAngazovanja implements Dao<AngazovanjeNaProjektu>{
     @Override
     public void save(AngazovanjeNaProjektu entity) {
         Main.fileAngazovanja.getList().add(entity);
+        List<Projekat> updatedList = helper.doRelationsSingle(entity, Main.fIleProject.getProjekatList());
+        Main.fIleProject.setProjekatList(updatedList);
         System.out.println("Usepesno sacuvano angazovanje na projektu.");
         List<AngazovanjeNaProjektu> list = Main.fileAngazovanja.getList();
         helper.updateFileAngazovanja(list);

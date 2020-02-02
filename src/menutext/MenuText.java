@@ -1,6 +1,9 @@
 package menutext;
 
-import enums.Uloga;
+import exception.MyInputMismatchException;
+import helper.Helper;
+
+import java.util.Scanner;
 
 public class MenuText {
 
@@ -41,5 +44,24 @@ public class MenuText {
 		System.out.println("Da li zelite da unesete novo angazovanje na projectu.");
 		System.out.println("1. Da.");
 		System.out.println("2. Ne.");
+	}
+
+    public static int showMenuNewProjectOrUpdate(Helper helper) {
+		int numberOfTrys = 3;
+		Scanner sc;
+		while (numberOfTrys > 0){
+			try {
+				System.out.println("Izaberite opciju");
+				System.out.println("1. Kreiranje novog projekta");
+				System.out.println("2. Kreiranje novih angazovanja na postojecem projektu.");
+				sc = new Scanner(System.in);
+				int choice = helper.validateInput(sc);
+				return choice;
+			}catch (MyInputMismatchException e){
+				numberOfTrys--;
+				System.err.println(e.getMessage());
+			}
+		}
+		return 0;
 	}
 }
