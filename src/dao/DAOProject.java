@@ -12,9 +12,7 @@ public class DAOProject implements Dao<Projekat> {
 
     @Override
     public void save(Projekat project) {
-        System.err.println("PRE DODAVANJA"+" "+Main.fIleProject.getProjekatList().size());
         Main.fIleProject.getProjekatList().add(project);
-        System.err.println("POSLE DODAVANJA"+" "+Main.fIleProject.getProjekatList().size());
         System.out.println("Usepesno sacuvan projekat.");
         List<Projekat> list = Main.fIleProject.getProjekatList();
         helper.updateFileProject(list);

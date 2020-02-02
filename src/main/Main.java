@@ -3,10 +3,7 @@ package main;
 import domen.Projekat;
 import domen.Zaposleni;
 import exception.MyInputMismatchException;
-import helper.FileProject;
-import helper.FileZaposleni;
-import helper.Helper;
-import helper.MyTimeOut;
+import helper.*;
 import menutext.MenuText;
 import services.ServiceProjekat;
 import services.ServiceProjekatImpl;
@@ -23,6 +20,7 @@ public class Main {
     private static Helper helper;
     public static FileZaposleni fileZaposleni;
     public static FileProject fIleProject;
+    public static FileAngazovanja fileAngazovanja;
 
     public static void main(String[] args) throws IOException {
         initApplication();
@@ -35,6 +33,9 @@ public class Main {
         serviceProjekat = new ServiceProjekatImpl();
         fileZaposleni = new FileZaposleni();
         fIleProject = new FileProject();
+        fileAngazovanja = new FileAngazovanja();
+        System.out.println(fileAngazovanja.getList().size()+" "+"OVO JE VELICINA ANGAZOVANJA");
+        System.out.println(fileAngazovanja.getList().get(0).toString()+" "+"OVO JE SADRZAJ");
     }
 
     public static void showMenu() {

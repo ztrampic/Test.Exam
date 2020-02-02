@@ -21,11 +21,11 @@ public class FileZaposleni {
     }
 
     public FileZaposleni() throws IOException {
-        File file = new File("Zaposleni.txt");
+        File file = new File("fileZaposleni.txt");
         if (file.exists()){
               readAndCreateList();
         }else {
-            try (PrintWriter writer = new PrintWriter(new File("Zaposleni.txt"))){
+            try (PrintWriter writer = new PrintWriter(new File("fileZaposleni.txt"))){
                 writer.println("1;Zarko;Trampic;false");
                 writer.println("2;Pera;Peric;false");
                 writer.println("3;Mica;Micic;false");
@@ -38,13 +38,12 @@ public class FileZaposleni {
     }
 
     private void readAndCreateList() {
-        try(BufferedReader reader = new BufferedReader(new FileReader("Zaposleni.txt"));){
+        try(BufferedReader reader = new BufferedReader(new FileReader("fileZaposleni.txt"));){
             List<String> lista = new ArrayList<>();
             String line;
             while ((line = reader.readLine()) != null){
                 lista.add(line);
             }
-            System.out.println(list.toString());
             this.list = lista.stream().map(line1 ->{
                 try {
                     return convertToZaposleni(line1);

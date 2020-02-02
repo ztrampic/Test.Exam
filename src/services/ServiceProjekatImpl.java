@@ -43,7 +43,7 @@ public class ServiceProjekatImpl implements ServiceProjekat{
 					newProject.setSifra(sifra);
 					newProject.setNaziv(naziv);
 					newProject.setDatumOd(helper.convertAndFormatStringToDate(datumOd));
-					newProject.setDatumOd(helper.convertAndFormatStringToDate(datumOd));
+					newProject.setDatumDo(helper.convertAndFormatStringToDate(datumDo));
 					daoProject.save(newProject);
 				} else {
 					System.err.println("Vec postoji projekat pod tom sifrom.");

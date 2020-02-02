@@ -1,13 +1,14 @@
 package helper;
 
+import domen.AngazovanjeNaProjektu;
 import domen.Projekat;
 import domen.Zaposleni;
+import enums.Uloga;
 import exception.MyInputMismatchException;
 
 import java.io.File;
 import java.io.PrintWriter;
 import java.text.DateFormat;
-import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,7 +36,7 @@ public class Helper {
     }
 
     public void updateFileZaposleni(List<Zaposleni> list){
-        try (PrintWriter writer = new PrintWriter(new File("Zaposleni.txt"))){
+        try (PrintWriter writer = new PrintWriter(new File("fileZaposleni.txt"))){
             for (Zaposleni z:list) {
                 writer.write(String.valueOf(z.getSifra()));
                 writer.write(";");
@@ -61,7 +62,7 @@ public class Helper {
     }
 
     public void updateFileProject(List<Projekat> list) {
-        try (PrintWriter writer = new PrintWriter(new File(" Project.txt"))){
+        try (PrintWriter writer = new PrintWriter(new File("fileProject.txt"))){
             for (Projekat pro:list) {
                 writer.write(String.valueOf(pro.getSifra()));
                 writer.write(";");
@@ -74,6 +75,35 @@ public class Helper {
             }
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+    public void updateFileAngazovanja(List<AngazovanjeNaProjektu> list) {
+        try (PrintWriter writer = new PrintWriter(new File("fileAngazovanja.txt"))){
+            for (AngazovanjeNaProjektu a:list) {
+                writer.write(String.valueOf(a.getBrojRadnihSati()));
+                writer.write(";");
+                writer.write(convertAndFormatDateToString(a.getDatumOd()));
+                writer.write(";");
+                writer.write(convertAndFormatDateToString(a.getDatumDo()));
+                writer.write(";");
+                writer.write(String.valueOf(a.getSifraProjekat()));
+                writer.write(";");
+                writer.write(String.valueOf(a.getSifraZaposlenog()));
+                writer.write(";");
+                writer.write(String.valueOf(a.getUloga().ordinal()));
+                writer.println();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public Uloga checkUloga(int uloga) {
+        switch (uloga){
+            case 0:
+                return Uloga.RUKOVODILAC;
+            default:
+                return Uloga.RUKOVODILAC;
         }
     }
 }

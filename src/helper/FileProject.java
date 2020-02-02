@@ -25,11 +25,11 @@ public class FileProject {
     }
 
     public FileProject() throws IOException {
-        File file = new File("Project.txt");
+        File file = new File("fileProject.txt");
         if (file.exists()) {
             readAndCreateList();
         } else {
-            try (PrintWriter writer = new PrintWriter(new File("Project.txt"))) {
+            try (PrintWriter writer = new PrintWriter(new File("fileProject.txt"))) {
                 writer.println("1;WebApplication;20.12.2019;20.10.2020");
                 writer.println("2;ECommerc;12.01.2011;20.12.2019");
                 writer.println("3;MobilaReactNative;01.04.2015;20.12.2016");
@@ -41,7 +41,7 @@ public class FileProject {
     }
 
     private void readAndCreateList() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("Project.txt"));) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("fileProject.txt"));) {
             List<String> lista = new ArrayList<>();
             String line;
             while ((line = reader.readLine()) != null) {

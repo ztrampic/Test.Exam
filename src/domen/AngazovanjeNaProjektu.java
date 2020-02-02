@@ -60,4 +60,15 @@ public class AngazovanjeNaProjektu {
 		this.uloga = uloga;
 	}
 
+	@Override
+	public String toString() {
+		return "AngazovanjeNaProjektu{" +
+				"brojRadnihSati=" + brojRadnihSati +
+				", datumOd=" + datumOd +
+				", datumDo=" + datumDo +
+				", sifraProjekat=" + sifraProjekat +
+				", sifraZaposlenog=" + sifraZaposlenog +
+				", uloga=" + uloga +
+				'}';
+	}
 }

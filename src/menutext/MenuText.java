@@ -17,7 +17,7 @@ public class MenuText {
 	}
 
 	public static void showMenuOptionsProjekat() {
-		System.out.println("1.Kreiranje novog projekta.");
+		System.out.println("1.Kreiranje novog projekta i dodela angazovanja.");
 		System.out.println("2.Kreiranje izvestaja o projektu.");
 		System.out.println("3.Pregled svih projekata");
 		System.out.println("4.Povratak na glavni meni.");
