@@ -1,5 +1,7 @@
 package menutext;
 
+import enums.Uloga;
+
 public class MenuText {
 
 	public static void showMainMenu() {
@@ -27,5 +29,17 @@ public class MenuText {
     public static int closeApp() {
 		System.out.println("Hvala sto ste koristili nasu aplikaciju");
 		return 0;
+	}
+
+    public static void showUlogaMenu() {
+		System.out.println("Izaberite Ulogu zaposlenog na projektu.");
+		System.out.println("1. Rukovodilac.");
+		System.out.println("2. Developer.");
+    }
+
+	public static void choseNextStep() {
+		System.out.println("Da li zelite da unesete novo angazovanje na projectu.");
+		System.out.println("1. Da.");
+		System.out.println("2. Ne.");
 	}
 }

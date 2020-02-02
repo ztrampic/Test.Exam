@@ -5,10 +5,7 @@ import domen.Zaposleni;
 import exception.MyInputMismatchException;
 import helper.*;
 import menutext.MenuText;
-import services.ServiceProjekat;
-import services.ServiceProjekatImpl;
-import services.ServiceZaposleni;
-import services.ServiceZaposleniImpl;
+import services.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.Scanner;
 public class Main {
     private static ServiceZaposleni serviceZaposleni;
     private static ServiceProjekat serviceProjekat;
+    private static ServiceAngazovanja serviceAngazovanja;
     private static Helper helper;
     public static FileZaposleni fileZaposleni;
     public static FileProject fIleProject;
@@ -31,11 +29,12 @@ public class Main {
         helper = new Helper();
         serviceZaposleni = new ServiceZaposleniImpl();
         serviceProjekat = new ServiceProjekatImpl();
+        serviceAngazovanja = new ServiceAngazovanjaImpl();
         fileZaposleni = new FileZaposleni();
         fIleProject = new FileProject();
         fileAngazovanja = new FileAngazovanja();
-        System.out.println(fileAngazovanja.getList().size()+" "+"OVO JE VELICINA ANGAZOVANJA");
-        System.out.println(fileAngazovanja.getList().get(0).toString()+" "+"OVO JE SADRZAJ");
+        List<Projekat> list = helper.doRelations(fileAngazovanja.getList(),fIleProject.getProjekatList());
+        fIleProject.setProjekatList(list);
     }
 
     public static void showMenu() {
@@ -54,7 +53,7 @@ public class Main {
                         projekatOptions();
                         break;
                     case 3:
-                        count = MenuText.closeApp();;
+                        count = MenuText.closeApp();
                         break;
                     default:
                         System.err.println("Niste izabrali nista od ponudjenih opcija");
@@ -78,7 +77,13 @@ public class Main {
                 int number = helper.validateInput(sc);
                 switch (number) {
                     case 1:
-                        serviceProjekat.saveProjekat();
+                        Projekat projekat = serviceProjekat.saveProjekat();
+                        if(projekat == null){
+                            count--;
+                            System.err.println("Neuspesno kreiranje novog projekta.");
+                        }else{
+                            serviceAngazovanja.createNewAngazovanje(projekat);
+                        }
                         break;
                     case 2:
 //                        System.out.println(fIleProject.getProjekatList().toString());

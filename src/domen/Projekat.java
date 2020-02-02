@@ -1,6 +1,7 @@
 package domen;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class Projekat {
 	private Date datumOd;
 	private Date datumDo;
 	private boolean isDeleted;
-	private List<AngazovanjeNaProjektu> listaAngazovanja;
+	private List<AngazovanjeNaProjektu> listaAngazovanja = new ArrayList<>();
 
 	public Projekat() {
 	}
@@ -72,6 +73,15 @@ public class Projekat {
 	public void setListaAngazovanja(List<AngazovanjeNaProjektu> listaAngazovanja) {
 		this.listaAngazovanja = listaAngazovanja;
 	}
+	/*
+	/ methods for synchronisation
+	 */
+	public void addAngazovanje(AngazovanjeNaProjektu angazovanjeNaProjektu){
+		listaAngazovanja.add(angazovanjeNaProjektu);
+	}
+	public void removeAngazovanje(AngazovanjeNaProjektu angazovanjeNaProjektu){
+		listaAngazovanja.remove(angazovanjeNaProjektu);
+	}
 
 	@Override
 	public String toString() {
@@ -80,7 +90,7 @@ public class Projekat {
 				", naziv='" + naziv + '\'' +
 				", datumOd=" + datumOd +
 				", datumDo=" + datumDo +
-				", listaAngazovanja=" + listaAngazovanja +
+				", listaAngazovanja=" + listaAngazovanja.toString() +
 				'}';
 	}
 

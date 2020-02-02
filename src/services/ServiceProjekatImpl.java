@@ -1,13 +1,12 @@
 package services;
 
+import dao.DAOAngazovanja;
 import dao.DAOProject;
 import dao.DAOZaposleni;
 import domen.Projekat;
-import domen.Zaposleni;
 import exception.MyInputMismatchException;
 import helper.Helper;
 import helper.MyTimeOut;
-import main.Main;
 
 import java.text.ParseException;
 import java.util.List;
@@ -17,10 +16,11 @@ public class ServiceProjekatImpl implements ServiceProjekat{
 
 	private DAOZaposleni daoZaposleni = new DAOZaposleni();
 	private DAOProject daoProject = new DAOProject();
+	private DAOAngazovanja daoAngazovanja = new DAOAngazovanja();
 	private Helper helper = new Helper();
 
 	@Override
-	public void saveProjekat() {
+	public Projekat saveProjekat() {
 		Scanner sc;
 		Projekat projekat = null;
 		int numberOfTrys = 3;
@@ -35,9 +35,9 @@ public class ServiceProjekatImpl implements ServiceProjekat{
 					sc = new Scanner(System.in);
 					System.out.println("Unesite naziv projekta");
 					String naziv = sc.next();
-					System.out.println("Unesite datum pocetka projekta.");
+					System.out.println("Unesite datum pocetka projekta. Format datuma je [ dd.MM.yyyy ].");
 					String datumOd = sc.next();
-					System.out.println("Unesite datum zavrsetka projekta.");
+					System.out.println("Unesite datum zavrsetka projekta. Format datuma je [ dd.MM.yyyy ].");
 					String datumDo = sc.next();
 					newProject.setDeleted(false);
 					newProject.setSifra(sifra);
@@ -45,6 +45,8 @@ public class ServiceProjekatImpl implements ServiceProjekat{
 					newProject.setDatumOd(helper.convertAndFormatStringToDate(datumOd));
 					newProject.setDatumDo(helper.convertAndFormatStringToDate(datumDo));
 					daoProject.save(newProject);
+					return newProject;
+
 				} else {
 					System.err.println("Vec postoji projekat pod tom sifrom.");
 					saveProjekat();
@@ -55,6 +57,7 @@ public class ServiceProjekatImpl implements ServiceProjekat{
 				if (numberOfTrys == 0) new MyTimeOut(3);
 			}
 		}
+		return null;
 	}
 
 	@Override

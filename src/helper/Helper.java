@@ -5,15 +5,18 @@ import domen.Projekat;
 import domen.Zaposleni;
 import enums.Uloga;
 import exception.MyInputMismatchException;
+import menutext.MenuText;
 
 import java.io.File;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Helper {
 
@@ -105,5 +108,39 @@ public class Helper {
             default:
                 return Uloga.RUKOVODILAC;
         }
+    }
+
+    public Uloga setUlogaOnProject(Scanner sc) {
+        int numberOfTrys = 3;
+        while (numberOfTrys > 0) {
+            try {
+                MenuText.showUlogaMenu();
+                int number = validateInput(sc);
+                switch (number) {
+                    case 1:
+                        return Uloga.RUKOVODILAC;
+                    case 2:
+                        return Uloga.DEVELOPER;
+                    default:
+                        return Uloga.DEVELOPER;
+                }
+            } catch (MyInputMismatchException e) {
+                numberOfTrys--;
+                System.err.println(e.getMessage());
+                if (numberOfTrys == 0) return null;
+            }
+        }
+        return null;
+    }
+
+    public List<Projekat> doRelations(List<AngazovanjeNaProjektu> angazovanja, List<Projekat> projects) {
+        for (AngazovanjeNaProjektu angaz:angazovanja){
+            for (Projekat p : projects) {
+                if(p.getSifra() == angaz.getSifraProjekat()){
+                    p.addAngazovanje(angaz);
+                }
+            }
+        }
+        return projects;
     }
 }

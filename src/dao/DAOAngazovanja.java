@@ -1,25 +1,34 @@
 package dao;
 
+import domen.AngazovanjeNaProjektu;
+import domen.Projekat;
+import helper.Helper;
+import main.Main;
+
 import java.util.List;
 
-public class DAOAngazovanja implements Dao<DAOAngazovanja>{
+public class DAOAngazovanja implements Dao<AngazovanjeNaProjektu>{
+    private Helper helper = new Helper();
     @Override
-    public void save(DAOAngazovanja entity) {
+    public void save(AngazovanjeNaProjektu entity) {
+        Main.fileAngazovanja.getList().add(entity);
+        System.out.println("Usepesno sacuvano angazovanje na projektu.");
+        List<AngazovanjeNaProjektu> list = Main.fileAngazovanja.getList();
+        helper.updateFileAngazovanja(list);
+    }
+
+    @Override
+    public void softDelete(AngazovanjeNaProjektu entity) {
 
     }
 
     @Override
-    public void softDelete(DAOAngazovanja entity) {
+    public void updat(AngazovanjeNaProjektu entity) {
 
     }
 
     @Override
-    public void updat(DAOAngazovanja entity) {
-
-    }
-
-    @Override
-    public List<DAOAngazovanja> getAll() {
+    public List<AngazovanjeNaProjektu> getAll() {
         return null;
     }
 }

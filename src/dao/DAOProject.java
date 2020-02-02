@@ -16,8 +16,6 @@ public class DAOProject implements Dao<Projekat> {
         System.out.println("Usepesno sacuvan projekat.");
         List<Projekat> list = Main.fIleProject.getProjekatList();
         helper.updateFileProject(list);
-        Main.showMenu();
-
     }
 
     @Override

@@ -1,13 +1,12 @@
 package services;
 
 import domen.Projekat;
-import domen.Zaposleni;
 
 import java.util.List;
 
 public interface ServiceProjekat {
 
-	void saveProjekat();
+	Projekat saveProjekat();
 
 	void updateProjekat();
 

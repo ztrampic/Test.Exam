@@ -13,5 +13,6 @@ public interface ServiceZaposleni {
 	void deleteZaposleni();
 
 	List<Zaposleni> getAllZaposleni();
-	
+
+    Zaposleni findBySifra();
 }
