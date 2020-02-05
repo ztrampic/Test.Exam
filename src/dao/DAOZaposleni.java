@@ -10,7 +10,11 @@ import helper.MyTimeOut;
 import main.Main;
 
 public class DAOZaposleni implements Dao<Zaposleni> {
-    private Helper helper = new Helper();
+    private final Helper helper;
+
+    public DAOZaposleni() {
+        helper = new Helper();
+    }
 
     @Override
     public void save(Zaposleni entity) {
@@ -29,15 +33,17 @@ public class DAOZaposleni implements Dao<Zaposleni> {
                 System.out.println("Uspesan Soft delete zaposlenog:" + " " + zaposleni2.toString());
             }
         }
-		helper.updateFileZaposleni(list);
+        helper.updateFileZaposleni(list);
     }
 
+    @Override
     public Zaposleni findBySifra(int sifra) {
         List<Zaposleni> list = Main.fileZaposleni.getList();
         Zaposleni zaposleni = list.stream().filter(zaposleni1 -> zaposleni1.getSifra() == sifra).findFirst()
                 .orElse(null);
         return zaposleni;
     }
+
 
     @Override
     public void updat(Zaposleni zaposleni) {
@@ -57,7 +63,7 @@ public class DAOZaposleni implements Dao<Zaposleni> {
                 z.setPrezime(prezime);
             }
         }
-		helper.updateFileZaposleni(list);
+        helper.updateFileZaposleni(list);
         System.out.println("Uspesno izmenjen zaposleni.");
         System.out.println("Novi podaci zaposlenog :" + " " + zaposleni.toString());
         new MyTimeOut(3);
@@ -69,6 +75,5 @@ public class DAOZaposleni implements Dao<Zaposleni> {
         List<Zaposleni> list = Main.fileZaposleni.getList();
         return list;
     }
-
 
 }

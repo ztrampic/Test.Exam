@@ -9,4 +9,5 @@ public interface Dao<T> {
 	void softDelete(T entity);
 	void updat(T entity);
     List<T> getAll();
+    T findBySifra(int sifra);
 }

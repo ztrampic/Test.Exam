@@ -7,8 +7,13 @@ import main.Main;
 
 import java.util.List;
 
-public class DAOAngazovanja implements Dao<AngazovanjeNaProjektu>{
-    private Helper helper = new Helper();
+public class DAOAngazovanja implements Dao<AngazovanjeNaProjektu> {
+    private final Helper helper;
+
+    public DAOAngazovanja() {
+        helper = new Helper();
+    }
+
     @Override
     public void save(AngazovanjeNaProjektu entity) {
         Main.fileAngazovanja.getList().add(entity);
@@ -31,6 +36,11 @@ public class DAOAngazovanja implements Dao<AngazovanjeNaProjektu>{
 
     @Override
     public List<AngazovanjeNaProjektu> getAll() {
+        return null;
+    }
+
+    @Override
+    public AngazovanjeNaProjektu findBySifra(int sifra) {
         return null;
     }
 }

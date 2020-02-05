@@ -14,10 +14,16 @@ import menutext.MenuText;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class ServiceAngazovanjaImpl implements ServiceAngazovanja{
-    private Helper helper = new Helper();
-    private DAOZaposleni daoZaposleni = new DAOZaposleni();
-    private DAOAngazovanja daoAngazovanja = new DAOAngazovanja();
+public class ServiceAngazovanjaImpl implements ServiceAngazovanja {
+    private final Helper helper;
+    private final DAOZaposleni daoZaposleni;
+    private final DAOAngazovanja daoAngazovanja;
+
+    public ServiceAngazovanjaImpl() {
+        helper = new Helper();
+        daoZaposleni = new DAOZaposleni();
+        daoAngazovanja = new DAOAngazovanja();
+    }
 
     @Override
     public void createNewAngazovanje(Projekat projekat) {
@@ -29,16 +35,16 @@ public class ServiceAngazovanjaImpl implements ServiceAngazovanja{
                 System.out.println("Unesite sifru zaposlenog");
                 int sifra = helper.validateInput(sc);
                 Zaposleni zaposleni = daoZaposleni.findBySifra(sifra);
-                if(zaposleni != null){
-                    AngazovanjeNaProjektu angazovanjeNaProjektu = createNewAngazovanja(projekat,zaposleni);
+                if (zaposleni != null) {
+                    AngazovanjeNaProjektu angazovanjeNaProjektu = createNewAngazovanja(projekat, zaposleni);
                     daoAngazovanja.save(angazovanjeNaProjektu);
                     chooseNextStep(projekat);
 
-                }else {
+                } else {
                     numberOfTrys--;
                     System.err.println("Ne postoji zaposleni pod tom sifrom.");
                 }
-            }catch (MyInputMismatchException | ParseException e){
+            } catch (MyInputMismatchException | ParseException e) {
                 numberOfTrys--;
                 System.err.println(e.getMessage());
             }
@@ -48,28 +54,29 @@ public class ServiceAngazovanjaImpl implements ServiceAngazovanja{
     private void chooseNextStep(Projekat projekat) {
         int numberOfTrys = 3;
         Scanner sc;
-        while (numberOfTrys > 0){
-          try {
-              sc = new Scanner(System.in);
-              MenuText.choseNextStep();
-              int choise = helper.validateInput(sc);
-              switch (choise){
-                  case 1:
-                      createNewAngazovanje(projekat);
-                      break;
-                  case 2:
-                      new MyTimeOut(3);
-                      Main.showMenu();
-                      break;
-                  default:
-                      System.out.println("Niste nista odabrali od ponudjenog.");
-                      numberOfTrys--;
-                      return;
-              }
-          }catch (MyInputMismatchException e){
-              System.err.println(e.getMessage());
-              if (numberOfTrys == 0) new MyTimeOut(3); Main.showMenu();
-          }
+        while (numberOfTrys > 0) {
+            try {
+                sc = new Scanner(System.in);
+                MenuText.choseNextStep();
+                int choise = helper.validateInput(sc);
+                switch (choise) {
+                    case 1:
+                        createNewAngazovanje(projekat);
+                        break;
+                    case 2:
+                        new MyTimeOut(3);
+                        Main.showMenu();
+                        break;
+                    default:
+                        System.out.println("Niste nista odabrali od ponudjenog.");
+                        numberOfTrys--;
+                        return;
+                }
+            } catch (MyInputMismatchException e) {
+                System.err.println(e.getMessage());
+                if (numberOfTrys == 0) new MyTimeOut(3);
+                Main.showMenu();
+            }
         }
     }
 
@@ -77,16 +84,16 @@ public class ServiceAngazovanjaImpl implements ServiceAngazovanja{
         AngazovanjeNaProjektu angazovanjeNaProjektu = new AngazovanjeNaProjektu();
         angazovanjeNaProjektu.setSifraZaposlenog(zaposleni.getSifra());
         angazovanjeNaProjektu.setSifraProjekat(projekat.getSifra());
-        Scanner sc =new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.println("Unesite broj radnih sati zaposlenog na projektu.");
         int numberOfTrys = 3;
-        while(numberOfTrys > 0){
+        while (numberOfTrys > 0) {
             try {
                 sc = new Scanner(System.in);
                 int brRadnihSati = helper.validateInput(sc);
                 angazovanjeNaProjektu.setBrojRadnihSati(Double.parseDouble(String.valueOf(brRadnihSati)));
                 numberOfTrys = 0;
-            }catch (MyInputMismatchException e){
+            } catch (MyInputMismatchException e) {
                 numberOfTrys--;
                 System.out.println(e.getMessage());
                 if (numberOfTrys == 0) createNewAngazovanje(projekat);

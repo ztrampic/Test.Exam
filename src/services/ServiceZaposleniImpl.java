@@ -14,9 +14,13 @@ import main.Main;
 
 public class ServiceZaposleniImpl implements ServiceZaposleni {
 
-    private DAOZaposleni daoZaposleni = new DAOZaposleni();
-    private Helper helper = new Helper();
+    private final DAOZaposleni daoZaposleni;
+    private final Helper helper;
 
+    public ServiceZaposleniImpl() {
+        daoZaposleni = new DAOZaposleni();;
+        helper = new Helper();
+    }
     @Override
     public void saveZaposleni() {
         Scanner sc;

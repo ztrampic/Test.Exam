@@ -8,7 +8,11 @@ import main.Main;
 import java.util.List;
 
 public class DAOProject implements Dao<Projekat> {
-    private Helper helper = new Helper();
+    private final Helper helper;
+
+    public DAOProject() {
+        helper = new Helper();
+    }
 
     @Override
     public void save(Projekat project) {
@@ -35,9 +39,10 @@ public class DAOProject implements Dao<Projekat> {
         return Main.fIleProject.getProjekatList();
     }
 
+    @Override
     public Projekat findBySifra(int sifra) {
         List<Projekat> list = Main.fIleProject.getProjekatList();
-		Projekat projekat = list.stream().filter(projekat1 -> projekat1.getSifra() == sifra).findFirst()
+        Projekat projekat = list.stream().filter(projekat1 -> projekat1.getSifra() == sifra).findFirst()
                 .orElse(null);
         return projekat;
     }

@@ -89,7 +89,7 @@ public class Main {
                                 }
                                 break;
                             case 2:
-                                System.out.println("OVDE SMO");
+                                serviceProjekat.updateProjekat();
                                 break;
                             default:
                                 System.err.println("Niste izabrali nista od ponudjenog");

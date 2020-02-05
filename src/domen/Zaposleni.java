@@ -1,5 +1,7 @@
 package domen;
 
+import java.util.Formatter;
+
 public class Zaposleni {
 	private int sifra;
 	private String ime;
@@ -40,6 +42,7 @@ public class Zaposleni {
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
+
 	@Override
 	public String toString() {
 		return "Zaposleni [sifra=" + sifra + ", ime=" + ime + ", prezime=" + prezime + ", isDeleted=" + deleted + "]";

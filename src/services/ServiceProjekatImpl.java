@@ -14,10 +14,17 @@ import java.util.Scanner;
 
 public class ServiceProjekatImpl implements ServiceProjekat{
 
-	private DAOZaposleni daoZaposleni = new DAOZaposleni();
-	private DAOProject daoProject = new DAOProject();
-	private DAOAngazovanja daoAngazovanja = new DAOAngazovanja();
-	private Helper helper = new Helper();
+	private final DAOZaposleni daoZaposleni;
+	private final DAOProject daoProject;
+	private final DAOAngazovanja daoAngazovanja;
+	private final Helper helper;
+
+	public ServiceProjekatImpl() {
+		daoZaposleni = new DAOZaposleni();
+		daoProject = new DAOProject();
+		daoAngazovanja = new DAOAngazovanja();
+		helper = new Helper();
+	}
 
 	@Override
 	public Projekat saveProjekat() {
@@ -46,10 +53,9 @@ public class ServiceProjekatImpl implements ServiceProjekat{
 					newProject.setDatumDo(helper.convertAndFormatStringToDate(datumDo));
 					daoProject.save(newProject);
 					return newProject;
-
 				} else {
+					numberOfTrys--;
 					System.err.println("Vec postoji projekat pod tom sifrom.");
-					saveProjekat();
 				}
 			} catch (MyInputMismatchException | ParseException e) {
 				numberOfTrys--;
